@@ -11,15 +11,24 @@ pipeline{
     }
 
     stages{
-        stage('Compilación Maven'){
-            steps{
-                bat 'mvn clean package -Dskiptests'
-            }
-        }
         stage('Construir imagen'){
             steps{
-                dir("${DOCKER_BUILD_DIR}"){
+                
                     bat "docker build . -t ${DOCKER_IMAGE}"
+                
+            }
+        }
+        stage('Limpiar contenedor existente') {
+            steps {
+                script {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+                        bat """
+                        docker container inspect ${CONTAINER_NAME} >nul 2>&1 && (
+                            docker container stop ${CONTAINER_NAME}
+                            docker container rm ${CONTAINER_NAME}
+                        ) || echo "No existe el contenedor '${CONTAINER_NAME}'."
+                        """
+                    }
                 }
             }
         }
