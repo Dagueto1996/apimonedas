@@ -42,7 +42,10 @@ public class ConfiguracionSeguridad {
                                         "/swagger-resources/**",
                                         "/webjars/**")
                                 .permitAll()
-                                // .antMatchers("/api/monedas/**").permitAll()
+                                // Endpoints temporalmente habilitados para pruebas
+                                .antMatchers("/api/usuarios/**").permitAll()
+                                .antMatchers("/api/monedas/**").permitAll()
+                                .antMatchers("/api/paises/**").permitAll()
                                 .anyRequest().authenticated())
                 .addFilterAfter(filtro, UsernamePasswordAuthenticationFilter.class)
                 .build();

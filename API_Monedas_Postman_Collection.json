@@ -1,0 +1,414 @@
+{
+  "info": {
+    "name": "API Monedas",
+    "description": "Colección de endpoints para la API de Monedas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Usuarios",
+      "item": [
+        {
+          "name": "Validar Login",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/usuarios/validar/admin/123",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "usuarios", "validar", "admin", "123"]
+            }
+          }
+        },
+        {
+          "name": "Listar Usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/usuarios/listar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "usuarios", "listar"]
+            }
+          }
+        },
+        {
+          "name": "Obtener Usuario por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/usuarios/obtener/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "usuarios", "obtener", "1"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Usuario por Nombre",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/usuarios/buscar/admin",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "usuarios", "buscar", "admin"]
+            }
+          }
+        },
+        {
+          "name": "Agregar Usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": \"testuser\",\n  \"nombre\": \"Usuario de Prueba\",\n  \"clave\": \"password123\",\n  \"roles\": \"USER\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/usuarios/agregar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "usuarios", "agregar"]
+            }
+          }
+        },
+        {
+          "name": "Modificar Usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"usuario\": \"testuser_updated\",\n  \"nombre\": \"Usuario Actualizado\",\n  \"clave\": \"newpassword123\",\n  \"roles\": \"ADMIN\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/usuarios/modificar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "usuarios", "modificar"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Usuario",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/usuarios/eliminar/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "usuarios", "eliminar", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Monedas",
+      "item": [
+        {
+          "name": "Listar Monedas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/monedas/listar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "monedas", "listar"]
+            }
+          }
+        },
+        {
+          "name": "Obtener Moneda por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/monedas/obtener/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "monedas", "obtener", "1"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Moneda por Nombre",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/monedas/buscar/peso",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "monedas", "buscar", "peso"]
+            }
+          }
+        },
+        {
+          "name": "Buscar Moneda por País",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/monedas/buscarporpais/Mexico",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "monedas", "buscarporpais", "Mexico"]
+            }
+          }
+        },
+        {
+          "name": "Agregar Moneda",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Peso Mexicano\",\n  \"sigla\": \"MXN\",\n  \"simbolo\": \"$\",\n  \"emisor\": \"Banco de Mexico\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/monedas/agregar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "monedas", "agregar"]
+            }
+          }
+        },
+        {
+          "name": "Modificar Moneda",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"nombre\": \"Peso Mexicano Actualizado\",\n  \"sigla\": \"MXN\",\n  \"simbolo\": \"$\",\n  \"emisor\": \"Banco de Mexico\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/monedas/modificar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "monedas", "modificar"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Moneda",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/monedas/eliminar/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "monedas", "eliminar", "1"]
+            }
+          }
+        },
+        {
+          "name": "Listar por Periodo",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idMoneda\": 1,\n  \"desde\": \"2024-01-01\",\n  \"hasta\": \"2024-12-31\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/monedas/listarporperiodo",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "monedas", "listarporperiodo"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Paises",
+      "item": [
+        {
+          "name": "Listar Paises",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/paises/listar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "paises", "listar"]
+            }
+          }
+        },
+        {
+          "name": "Obtener País por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/paises/obtener/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "paises", "obtener", "1"]
+            }
+          }
+        },
+        {
+          "name": "Buscar País por Nombre",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/paises/buscar/Mexico",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "paises", "buscar", "Mexico"]
+            }
+          }
+        },
+        {
+          "name": "Agregar País",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Mexico\",\n  \"codigoAlfa2\": \"MX\",\n  \"codigoAlfa3\": \"MEX\",\n  \"moneda\": {\n    \"id\": 1\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/paises/agregar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "paises", "agregar"]
+            }
+          }
+        },
+        {
+          "name": "Modificar País",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"nombre\": \"Mexico Actualizado\",\n  \"codigoAlfa2\": \"MX\",\n  \"codigoAlfa3\": \"MEX\",\n  \"moneda\": {\n    \"id\": 1\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/paises/modificar",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "paises", "modificar"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar País",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/paises/eliminar/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "paises", "eliminar", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Swagger",
+      "item": [
+        {
+          "name": "Swagger UI",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/swagger-ui/index.html",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["swagger-ui", "index.html"]
+            }
+          }
+        },
+        {
+          "name": "OpenAPI Docs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/v3/api-docs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["v3", "api-docs"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
