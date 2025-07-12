@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bdmonedas-cm-iniciar
+  namespace: default
+data:
+  DDL_monedas.sql: |
+    /* crear tabla MONEDA en docker 
+     y manuealmente como script */
+    CREATE TABLE moneda(
+      id SERIAL PRIMARY KEY,
+      moneda VARCHAR(100) NOT NULL, 
+      sigla VARCHAR(5) NOT NULL,
+      simbolo VARCHAR(5) NOT NULL,
+      emisora VARCHAR(100) NOT NULL,
+      imagen BYTEA NULL 
+    );

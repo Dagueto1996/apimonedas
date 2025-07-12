@@ -1,0 +1,85 @@
+pipeline{
+    agent any
+
+    environment{
+        DOCKER_IMAGE = 'api-monedas'
+        CONTAINER_NAME = 'api_monedas_jenkins'
+        DOCKER_NETWORK = 'apimonedas_monedas_network'
+        DOCKER_BUILD_DIR = 'presentacion'
+        HOST_PORT = '9080'
+        CONTAINER_PORT = '8080'
+        POSTGRES_HOST = 'postgres_monedas'
+    }
+
+    stages{
+        stage('Construir imagen'){
+            steps{
+                
+                    bat "docker build . -t ${DOCKER_IMAGE}"
+                
+            }
+        }
+        stage('Verificar dependencias') {
+            steps {
+                script {
+                    // Verificar que la red Docker existe
+                    bat "docker network inspect ${DOCKER_NETWORK} || docker network create ${DOCKER_NETWORK}"
+                    
+                    // Verificar que PostgreSQL esté corriendo
+                    bat """
+                    docker ps --filter "name=${POSTGRES_HOST}" --format "table {{.Names}}" | findstr ${POSTGRES_HOST} || (
+                        echo "PostgreSQL no está corriendo. Iniciando con docker-compose..."
+                        docker-compose up -d postgres
+                    )
+                    """
+                }
+            }
+        }
+        
+        stage('Limpiar contenedor existente') {
+            steps {
+                script {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+                        bat """
+                        docker container inspect ${CONTAINER_NAME} >nul 2>&1 && (
+                            docker container stop ${CONTAINER_NAME}
+                            docker container rm ${CONTAINER_NAME}
+                        ) || echo "No existe el contenedor '${CONTAINER_NAME}'."
+                        """
+                    }
+                }
+            }
+        }
+        stage('Desplegar contenedor'){
+            steps{
+                bat """
+                docker run --network ${DOCKER_NETWORK} --name ${CONTAINER_NAME} \
+                    -p ${HOST_PORT}:${CONTAINER_PORT} \
+                    -e SPRING_DATASOURCE_URL=jdbc:postgresql://${POSTGRES_HOST}:5432/monedas \
+                    -e SPRING_DATASOURCE_USERNAME=postgres \
+                    -e SPRING_DATASOURCE_PASSWORD=sa \
+                    -e SPRING_JPA_HIBERNATE_DDL_AUTO=update \
+                    -e SPRING_JPA_SHOW_SQL=true \
+                    -d ${DOCKER_IMAGE}
+                """
+            }
+        }
+        
+        stage('Verificar despliegue') {
+            steps {
+                script {
+                    // Esperar a que la aplicación esté lista
+                    bat "timeout /t 30 /nobreak"
+                    
+                    // Verificar que el contenedor esté corriendo
+                    bat "docker ps --filter name=${CONTAINER_NAME} --format \"table {{.Names}}\\t{{.Status}}\""
+                    
+                    // Verificar conectividad (opcional)
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+                        bat "curl -f http://localhost:${HOST_PORT}/api/health || echo \"Health check falló, pero el contenedor está corriendo\""
+                    }
+                }
+            }
+        }
+    }
+}

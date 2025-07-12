@@ -38,6 +38,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<postgresql.version>42.5.0</postgresql.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -52,6 +53,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>

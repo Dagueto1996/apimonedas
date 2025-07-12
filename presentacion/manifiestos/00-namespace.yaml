@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apimonedas
+  labels:
+    name: apimonedas
+    app: api-monedas

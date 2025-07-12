@@ -1,0 +1,6 @@
+{
+  "usuario": "testuser",
+  "nombre": "Usuario de Prueba",
+  "clave": "password123",
+  "roles": "USER"
+}
